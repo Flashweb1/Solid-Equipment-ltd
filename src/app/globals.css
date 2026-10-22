@@ -1,0 +1,450 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Montserrat", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-navy-950: #070d1a;
+  --color-navy-900: #0e1728;
+  --color-navy-850: #131f36;
+  --color-navy-800: #1e293b;
+  --color-navy-700: #2a3a55;
+  --color-navy-600: #3a4e6e;
+  --color-navy-500: #4c6288;
+
+  /* Accent scale retuned to the official SEL logo red (#E2231F) */
+  --color-bronze-900: #5c0d09;
+  --color-bronze-800: #8c130d;
+  --color-bronze-700: #b51a12;
+  --color-bronze-600: #e2231f;
+  --color-bronze-500: #e8402f;
+  --color-bronze-400: #ee6a5d;
+  --color-bronze-300: #f59c93;
+
+  --color-gold-600: #d97706;
+  --color-gold-500: #f59e0b;
+  --color-gold-400: #fbbf24;
+  --color-gold-300: #fcd34d;
+
+  --color-steel-50: #f8fafc;
+  --color-steel-100: #eef2f7;
+  --color-steel-200: #e2e8f0;
+  --color-steel-300: #cbd5e1;
+  --color-steel-400: #94a3b8;
+  --color-steel-500: #64748b;
+  --color-steel-600: #475569;
+  --color-steel-700: #334155;
+}
+
+/* ---------- Self-hosted fonts ---------- */
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/montserrat-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/montserrat-800.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/montserrat-900.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("/fonts/ibm-plex-mono-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("/fonts/ibm-plex-mono-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("/fonts/ibm-plex-mono-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Base ---------- */
+::selection {
+  background: var(--color-bronze-600);
+  color: #fff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-steel-50);
+  color: var(--color-navy-900);
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar {
+  width: 11px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-navy-600);
+  border-radius: 9999px;
+  border: 3px solid var(--color-steel-50);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-bronze-600);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-bronze-600);
+  outline-offset: 2px;
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(36px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes kenburns {
+  from {
+    transform: scale(1.12);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  80%,
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+@keyframes ticker-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ---------- Custom classes ---------- */
+/* Unify photography toward the brand palette */
+main img {
+  filter: saturate(0.86) contrast(1.04) brightness(0.985);
+}
+
+.marquee-track {
+  animation: marquee 55s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.hero-rise {
+  opacity: 0;
+  animation: hero-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-fade {
+  opacity: 0;
+  animation: hero-fade 1.4s ease-out forwards;
+}
+
+.kenburns {
+  animation: kenburns 2.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.float-y {
+  animation: float-y 5s ease-in-out infinite;
+}
+
+.pulse-ring::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: #22c55e;
+  animation: pulse-ring 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  z-index: -1;
+}
+
+/* Scroll reveal — restrained, Envato-flat (fade + tiny rise) */
+.reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero: headline lines slide up out of a mask */
+@keyframes hero-line {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.hero-line {
+  transform: translateY(110%);
+  animation: hero-line 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Hero carousel — variables are written by hero.tsx */
+.hero-photo {
+  transform: translate3d(calc(var(--mx, 0) * -18px), calc(var(--my, 0) * -12px), 0) scale(1.05);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.slide-frame {
+  opacity: 0;
+  transition: opacity 1.3s ease;
+}
+.slide-frame.is-active {
+  opacity: 1;
+}
+@keyframes slide-zoom {
+  from {
+    transform: scale(1.14);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+.slide-frame.is-active .slide-zoom {
+  animation: slide-zoom 9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes hero-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.hero-progress {
+  animation: hero-progress var(--slide-ms, 7000ms) linear forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-line {
+    animation: none;
+    transform: none;
+  }
+  .slide-frame.is-active .slide-zoom {
+    animation: none;
+  }
+  .float-y {
+    animation: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .hero-rise,
+  .hero-fade,
+  .kenburns {
+    animation: none;
+    opacity: 1;
+  }
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* Technical grid overlay */
+.grid-lines {
+  background-image:
+    linear-gradient(to right, rgba(148, 163, 184, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.055) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, #000 30%, transparent 78%);
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, #000 30%, transparent 78%);
+}
+
+.grid-lines-light {
+  background-image:
+    linear-gradient(to right, rgba(30, 41, 59, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(30, 41, 59, 0.04) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, #000 30%, transparent 78%);
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, #000 30%, transparent 78%);
+}
+
+.noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Glassmorphism panel — premium frosted surface */
+.glass {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1.25rem;
+  box-shadow:
+    0 24px 60px -20px rgba(7, 13, 26, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 1.25rem;
+}
+
+/* Flat card surface — 1px border, quiet resting shadow, no lift */
+.card-soft {
+  border: 1px solid var(--color-steel-200);
+  border-radius: 0.75rem;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+.card-soft:hover {
+  border-color: var(--color-steel-300);
+  box-shadow: 0 6px 18px -8px rgba(15, 23, 42, 0.12);
+}
+
+/* Flat primary button (brand red) — no glow */
+.btn-glow {
+  box-shadow: none;
+}
+.btn-glow:hover {
+  box-shadow: 0 4px 12px -6px rgba(226, 35, 31, 0.4);
+}
+
+/* Flat secondary button (gold) — no glow */
+.btn-glow-gold {
+  box-shadow: none;
+}
+.btn-glow-gold:hover {
+  box-shadow: 0 4px 12px -6px rgba(245, 158, 11, 0.4);
+}
+
+/* Restrained shadow for elevated dark surfaces */
+.shadow-premium {
+  box-shadow: 0 12px 32px -18px rgba(7, 13, 26, 0.35);
+}
+
+/* Outline display text */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(148, 163, 184, 0.22);
+}
+
+/* Flat brand accent bar (single solid red) */
+.hazard-bar {
+  background: var(--color-bronze-600);
+}
+
+/* Status dots are static by default (calm, not busy) */
+.status-dot {
+  animation: none;
+}
