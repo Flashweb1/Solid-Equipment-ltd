@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Spare Parts & Engines — OEM Components, Turbochargers, Undercarriage",
   description:
     "Genuine OEM and aftermarket spare parts: complete engines, turbochargers, undercarriage track chains, rollers, sprockets and wear parts (GET) for Caterpillar, Komatsu & Hyundai.",
+  alternates: { canonical: "/parts" },
 };
 
 const KEYS = ["category", "subcategory", "brand", "availability", "q"] as const;

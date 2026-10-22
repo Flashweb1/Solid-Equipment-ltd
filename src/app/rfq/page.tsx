@@ -16,6 +16,8 @@ export const metadata: Metadata = {
   title: "Request a Quotation (RFQ) — Machinery, Parts & Field Support",
   description:
     "Submit a request for quotation for equipment leasing, outright purchase, spare parts or field support. Our procurement desk responds within 4 working hours.",
+  alternates: { canonical: "/rfq" },
+  robots: { index: false, follow: true },
 };
 
 const SERVICE_MAP: Record<string, string> = {

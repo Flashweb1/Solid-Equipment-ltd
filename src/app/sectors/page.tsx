@@ -20,6 +20,7 @@ export const metadata: Metadata = {
   title: "Sectors — Building Construction & Mining / Quarrying",
   description:
     "Solid Equipment Ltd supports high-rise building construction and mining & quarrying operations across West Africa with machinery, parts and dedicated field support.",
+  alternates: { canonical: "/sectors" },
 };
 
 const SECTORS = [

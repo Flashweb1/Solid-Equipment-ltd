@@ -8,17 +8,20 @@ import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
+  alternates: { canonical: "/" },
   title: {
-    default:
-      "Solid Equipment Ltd — Heavy Machinery, Precision Parts & On-Site Reliability | West Africa",
+    default: "Heavy Equipment & Parts Supplier in Lagos | Solid Equipment",
     template: "%s | Solid Equipment Ltd",
   },
   description:
-    "Powering civil infrastructure, high-rise building construction, and mining operations across West Africa through flexible leasing, equipment sales, and genuine spare parts. Caterpillar, Komatsu & Hyundai.",
+    "Heavy equipment sales, leasing and genuine spare parts from Solid Equipment Ltd in Alakuko, Lagos. Serving construction, mining and infrastructure projects across West Africa.",
   keywords: [
     "construction equipment Nigeria",
+    "heavy equipment supplier Lagos",
+    "construction equipment Alakuko",
+    "equipment leasing Lagos",
     "heavy machinery leasing West Africa",
-    "excavator sales Port Harcourt",
+    "excavator sales Lagos",
     "spare parts Caterpillar Komatsu",
     "hydraulic breaker",
     "turbocharger OEM parts",
@@ -32,12 +35,14 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
+    url: SITE.url,
     siteName: SITE.name,
-    title: "Solid Equipment Ltd — Heavy Machinery & Precision Parts",
+    title: "Heavy Equipment & Parts Supplier in Lagos | Solid Equipment",
     description:
-      "Sales, leasing, spare parts and mining support for civil infrastructure and mining operations across West Africa.",
+      "Heavy equipment sales, leasing and genuine spare parts from Solid Equipment Ltd in Alakuko, Lagos, serving projects across West Africa.",
     images: [{ url: "/images/hero-mining.jpg", width: 1600, height: 900 }],
   },
+  twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true },
 };
 
@@ -61,7 +66,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     foundingDate: String(SITE.founded),
     address: {
       "@type": "PostalAddress",
-      streetAddress: SITE.hq,
+      streetAddress: SITE.addressStreet,
       addressLocality: SITE.addressLocality,
       addressRegion: SITE.addressRegion,
       addressCountry: "NG",
@@ -70,6 +75,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     areaServed: "West Africa",
     openingHours: "Mo-Su 00:00-24:00",
     sameAs: ["https://wa.me/2348033591883"],
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+2348033591883",
+      email: SITE.email,
+      contactType: "sales",
+      areaServed: "NG",
+      availableLanguage: "English",
+    },
   };
 
   return (

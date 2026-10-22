@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Machinery Fleet — Earthmoving, Material Handling & Road Equipment",
   description:
     "Excavators, dozers, graders, wheel loaders and articulated haulers for lease or outright purchase. Caterpillar, Komatsu & Hyundai fleets deployed across West Africa.",
+  alternates: { canonical: "/machinery" },
 };
 
 const KEYS = ["category", "subcategory", "brand", "availability", "q"] as const;

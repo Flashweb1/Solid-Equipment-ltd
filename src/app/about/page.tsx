@@ -19,6 +19,7 @@ export const metadata: Metadata = {
   title: "About Us — Lagos HQ, 10+ Years in West Africa",
   description:
     "Solid Equipment Ltd operates from its headquarters in Alakuko, Lagos, coordinating fleet dispatch, replacement part distribution and rapid engineering response across West Africa.",
+  alternates: { canonical: "/about" },
 };
 
 const VALUES = [

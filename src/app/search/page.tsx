@@ -18,6 +18,8 @@ export async function generateMetadata({
   return {
     title: q ? `Search — “${q}”` : "Search Equipment & Parts",
     description: `Search the Solid Equipment Ltd catalog for ${q || "machinery and spare parts"}.`,
+    alternates: { canonical: "/search" },
+    robots: { index: false, follow: true },
   };
 }
 

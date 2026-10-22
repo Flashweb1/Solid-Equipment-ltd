@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ArrowRight, ChevronDown, Menu, Phone, X } from "lucide-react";
-import { NAV_LINKS, SITE } from "@/lib/site";
+import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
+import { NAV_LINKS } from "@/lib/site";
 
 import { SelMark } from "@/components/logo";
 
@@ -124,13 +124,6 @@ function SiteHeaderContent({ pathname }: { pathname: string }) {
           </nav>
 
           <div className="flex items-center gap-3">
-            <a
-              href={SITE.phoneHref}
-              className="hidden items-center gap-2 text-[13px] font-medium whitespace-nowrap text-white/70 transition-colors hover:text-white xl:flex"
-            >
-              <Phone className="h-4 w-4 text-bronze-400" />
-              {SITE.phoneDisplay}
-            </a>
             <Link
               href="/rfq"
               className="hidden rounded-full bg-white px-5 py-2.5 text-sm font-semibold whitespace-nowrap text-navy-950 transition-colors duration-200 hover:bg-bronze-600 hover:text-white sm:block"
@@ -217,12 +210,6 @@ function SiteHeaderContent({ pathname }: { pathname: string }) {
             ))}
           </nav>
           <div className="space-y-3 border-t border-white/10 px-4 py-6 sm:px-6">
-            <a
-              href={SITE.phoneHref}
-              className="flex items-center justify-center gap-2 rounded-full border border-white/20 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
-            >
-              <Phone className="h-4 w-4 text-bronze-400" /> {SITE.phoneDisplay}
-            </a>
             <Link
               href="/rfq"
               className="block rounded-full bg-bronze-600 py-3.5 text-center text-sm font-semibold text-white transition-colors hover:bg-bronze-500"

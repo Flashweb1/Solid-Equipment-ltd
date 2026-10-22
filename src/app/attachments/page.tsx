@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Attachments & Tools — Hydraulic Breakers, Buckets, Rippers",
   description:
     "Hydraulic breakers (jackhammers), heavy-duty buckets, rippers and quick couplers for excavators and carriers of all sizes.",
+  alternates: { canonical: "/attachments" },
 };
 
 const KEYS = ["category", "subcategory", "brand", "availability", "q"] as const;

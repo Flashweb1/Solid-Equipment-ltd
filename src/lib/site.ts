@@ -12,6 +12,8 @@ export const SITE = {
     ),
   email: "sales@solidequipmentltd.com",
   hq: "Plot 951, Km 32 Lagos - Abeokuta Expressway, beside AMJE Bus Stop, Alakuko",
+  addressStreet:
+    "Plot 951, Km 32 Lagos - Abeokuta Expressway, beside AMJE Bus Stop",
   addressLocality: "Alakuko",
   addressRegion: "Lagos",
   addressCountry: "Nigeria",
@@ -147,6 +149,7 @@ export type NavLink = {
 
 export const NAV_LINKS: NavLink[] = [
   { label: "Home", href: "/" },
+  { label: "Contact", href: "/contact" },
   {
     label: "Machinery Fleet",
     href: "/machinery",
@@ -222,7 +225,6 @@ export const NAV_LINKS: NavLink[] = [
   },
   { label: "Sectors", href: "/sectors" },
   { label: "About Us", href: "/about" },
-  { label: "Contact", href: "/contact" },
 ];
 
 export const POPULAR_SEARCHES = [

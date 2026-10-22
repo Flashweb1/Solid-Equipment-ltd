@@ -16,6 +16,7 @@ export async function generateMetadata({
   return {
     title: `${product.name}${product.oemPartNumber ? ` — OEM ${product.oemPartNumber}` : ""}`,
     description: product.description.slice(0, 160),
+    alternates: { canonical: `/catalog/${product.slug}` },
     openGraph: { images: [{ url: product.imageUrl }] },
   };
 }

@@ -15,6 +15,14 @@ export const metadata: Metadata = {
   title: "Contact Us — Visit Our Alakuko, Lagos Office",
   description:
     "Contact Solid Equipment Ltd by phone, WhatsApp or email, or get directions to Plot 951, Km 32 Lagos - Abeokuta Expressway, beside AMJE Bus Stop, Alakuko.",
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    type: "website",
+    title: "Contact Solid Equipment Ltd | Alakuko, Lagos",
+    description:
+      "Call, email or WhatsApp Solid Equipment Ltd, or get directions to our office on Lagos - Abeokuta Expressway in Alakuko.",
+    url: "/contact",
+  },
 };
 
 const CONTACT_METHODS = [

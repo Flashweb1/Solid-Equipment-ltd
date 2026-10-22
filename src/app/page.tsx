@@ -82,7 +82,7 @@ export default async function HomePage() {
           <SectionHeading
             eyebrow=" 03 · Fleet Highlights"
             title="Ready to Work Today"
-            description="Featured machinery and components from our Port Harcourt yard — inspected, serviced and available for immediate deployment."
+            description="Featured machinery and components from our yard — inspected, serviced and available for immediate deployment."
             href="/machinery"
             hrefLabel="Browse Full Fleet"
           />

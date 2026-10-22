@@ -121,7 +121,7 @@ const products = [
     model: "JS130",
     oem: null,
     description:
-      "The 13-ton JS130 is one of the most requested excavators in our Port Harcourt yard — a compact, high-productivity crawler for trenching, utility works and confined urban sites. Aggressive hydraulics, a monobloc boom and low operating costs make it the backbone of many Nigerian site fleets.",
+      "The 13-ton JS130 is one of the most requested excavators in our fleet — a compact, high-productivity crawler for trenching, utility works and confined urban sites. Aggressive hydraulics, a monobloc boom and low operating costs make it the backbone of many Nigerian site fleets.",
     condition: "New",
     availability: "In Stock",
     image: "/images/excavator.jpg",

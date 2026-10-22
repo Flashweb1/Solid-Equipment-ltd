@@ -176,8 +176,7 @@ export default function ProductDetailView({
                 <div className="mt-8 space-y-2.5 border-t border-steel-200 pt-6 text-sm text-steel-600">
                   <p className="flex items-center gap-2.5">
                     <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600" />
-                    Inspected, serviced &amp; dispatched from our Port Harcourt
-                    yard
+                    Inspected, serviced &amp; dispatched from our yard
                   </p>
                   <p className="flex items-center gap-2.5">
                     <CalendarCheck2 className="h-4 w-4 shrink-0 text-bronze-600" />
