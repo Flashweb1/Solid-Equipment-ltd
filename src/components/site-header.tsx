@@ -69,7 +69,7 @@ function SiteHeaderContent({ pathname }: { pathname: string }) {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
+          <nav className="hidden items-center gap-1 xl:flex" aria-label="Primary">
             {NAV_LINKS.filter((l) => l.href !== "/").map((link, i) => (
               <div
                 key={link.label}
@@ -125,6 +125,12 @@ function SiteHeaderContent({ pathname }: { pathname: string }) {
 
           <div className="flex items-center gap-3">
             <Link
+              href="/contact"
+              className="hidden items-center text-[13px] font-medium whitespace-nowrap text-white/70 transition-colors hover:text-white lg:flex"
+            >
+              Contact
+            </Link>
+            <Link
               href="/rfq"
               className="hidden rounded-full bg-white px-5 py-2.5 text-sm font-semibold whitespace-nowrap text-navy-950 transition-colors duration-200 hover:bg-bronze-600 hover:text-white sm:block"
             >
@@ -133,7 +139,7 @@ function SiteHeaderContent({ pathname }: { pathname: string }) {
             <button
               type="button"
               onClick={() => setMobileOpen(true)}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:bg-white/10 lg:hidden"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:bg-white/10 xl:hidden"
               aria-label="Open menu"
             >
               <Menu className="h-5 w-5" />
@@ -144,7 +150,7 @@ function SiteHeaderContent({ pathname }: { pathname: string }) {
 
       {/* Mobile menu */}
       {mobileOpen ? (
-        <div className="fixed inset-0 z-[60] flex flex-col bg-navy-950 lg:hidden">
+        <div className="fixed inset-0 z-[60] flex flex-col bg-navy-950 xl:hidden">
           <div className="flex h-20 items-center justify-between border-b border-white/10 px-4 sm:px-6">
             <div className="flex items-center gap-3">
               <LogoMark className="h-9 w-9" />
@@ -162,6 +168,14 @@ function SiteHeaderContent({ pathname }: { pathname: string }) {
             </button>
           </div>
           <nav className="flex-1 overflow-y-auto px-4 py-6 sm:px-6" aria-label="Mobile">
+            <Link
+              href="/contact"
+              className={`block border-b border-white/8 py-4 font-display text-xl font-extrabold tracking-tight ${
+                isActive("/contact") ? "text-bronze-400" : "text-white"
+              }`}
+            >
+              Contact
+            </Link>
             {NAV_LINKS.map((link, i) => (
               <div key={link.label} className="border-b border-white/8">
                 <div className="flex items-center justify-between">
