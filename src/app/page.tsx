@@ -20,7 +20,7 @@ import { Reveal, StatCounter } from "@/components/motion";
 import { getProducts } from "@/lib/queries";
 import { SITE } from "@/lib/site";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 const ABOUT_POINTS = [
   "Fleet dispatch coordinated from a single modern facility",

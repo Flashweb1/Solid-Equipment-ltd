@@ -224,6 +224,7 @@ export const NAV_LINKS: NavLink[] = [
   },
   { label: "Sectors", href: "/sectors" },
   { label: "About Us", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export const POPULAR_SEARCHES = [

@@ -2,6 +2,13 @@ import { db } from "@/db";
 import { products, type Product } from "@/db/schema";
 import { and, asc, desc, eq, ilike, inArray, ne, or, sql } from "drizzle-orm";
 
+// Escape LIKE/ILIKE wildcards so a user typing % or _ searches for those
+// characters literally instead of matching everything.
+function likePattern(q: string): string {
+  const escaped = q.replace(/[\\%_]/g, (c) => `\\${c}`);
+  return `%${escaped}%`;
+}
+
 export type CatalogFilters = {
   categories?: string[];
   subcategory?: string;
@@ -29,7 +36,7 @@ export async function getProducts(
     }
     if (filters.featuredOnly) conditions.push(eq(products.featured, true));
     if (filters.q) {
-      const like = `%${filters.q}%`;
+      const like = likePattern(filters.q);
       conditions.push(
         or(
           ilike(products.name, like),
@@ -102,7 +109,7 @@ export type Suggestion = {
 
 export async function getSearchSuggestions(q: string): Promise<Suggestion[]> {
   try {
-    const like = `%${q}%`;
+    const like = likePattern(q);
     return await db
       .select({
         slug: products.slug,
@@ -136,6 +143,21 @@ export async function getAllProductSlugs(): Promise<string[]> {
     return rows.map((r) => r.slug);
   } catch (error) {
     console.error("getAllProductSlugs failed:", error);
+    return [];
+  }
+}
+
+// slug + createdAt, so the sitemap can report an honest lastModified instead of
+// claiming every URL changed "now" on each crawl.
+export async function getProductsForSitemap(): Promise<
+  { slug: string; createdAt: Date }[]
+> {
+  try {
+    return await db
+      .select({ slug: products.slug, createdAt: products.createdAt })
+      .from(products);
+  } catch (error) {
+    console.error("getProductsForSitemap failed:", error);
     return [];
   }
 }

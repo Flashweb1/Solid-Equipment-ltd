@@ -6,10 +6,10 @@ import { useEffect, useState } from "react";
 import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
 import { NAV_LINKS } from "@/lib/site";
 
-import { SelMark } from "@/components/logo";
+import { SelBadge } from "@/components/logo";
 
-function LogoMark({ className = "h-10 w-10" }: { className?: string }) {
-  return <SelMark className={className} />;
+function LogoMark({ className = "h-12 w-12" }: { className?: string }) {
+  return <SelBadge className={className} />;
 }
 
 export default function SiteHeader() {
@@ -41,6 +41,30 @@ function SiteHeaderContent({ pathname }: { pathname: string }) {
     };
   }, [mobileOpen]);
 
+  // Close desktop submenus on Escape (restoring focus to the trigger) and on
+  // outside click, so keyboard users can exit a hovered-open submenu.
+  useEffect(() => {
+    if (openDropdown === null) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      const el = document.querySelector<HTMLElement>(
+        `[data-nav-index="${openDropdown}"]`
+      );
+      el?.focus();
+      setOpenDropdown(null);
+    };
+    const onDocClick = (e: MouseEvent) => {
+      const t = e.target as Element | null;
+      if (!t?.closest?.("[data-nav-item]")) setOpenDropdown(null);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    document.addEventListener("mousedown", onDocClick);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("mousedown", onDocClick);
+    };
+  }, [openDropdown]);
+
   const isActive = (href: string) => {
     const base = href.split("?")[0];
     if (base === "/") return pathname === "/";
@@ -69,17 +93,27 @@ function SiteHeaderContent({ pathname }: { pathname: string }) {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden items-center gap-1 xl:flex" aria-label="Primary">
+          <nav className="hidden items-center gap-0 xl:flex" aria-label="Primary">
             {NAV_LINKS.filter((l) => l.href !== "/").map((link, i) => (
               <div
                 key={link.label}
+                data-nav-item=""
                 className="relative"
                 onMouseEnter={() => setOpenDropdown(link.children ? i : null)}
                 onMouseLeave={() => setOpenDropdown(null)}
               >
                 <Link
                   href={link.href}
-                  className={`relative flex items-center gap-1 px-3.5 py-2.5 text-[13px] font-medium whitespace-nowrap transition-colors ${
+                  data-nav-index={link.children ? i : undefined}
+                  aria-expanded={link.children ? openDropdown === i : undefined}
+                  onClick={(e) => {
+                    if (!link.children || openDropdown === i) return;
+                    // First tap/click on a submenu parent opens the submenu;
+                    // a second click navigates. Keyboard Enter lands here too.
+                    e.preventDefault();
+                    setOpenDropdown(i);
+                  }}
+                  className={`relative flex items-center gap-1 px-2 py-2.5 text-xs font-medium whitespace-nowrap transition-colors ${
                     isActive(link.href) ? "text-white" : "text-white/70 hover:text-white"
                   }`}
                 >
@@ -125,12 +159,6 @@ function SiteHeaderContent({ pathname }: { pathname: string }) {
 
           <div className="flex items-center gap-3">
             <Link
-              href="/contact"
-              className="hidden items-center text-[13px] font-medium whitespace-nowrap text-white/70 transition-colors hover:text-white lg:flex"
-            >
-              Contact
-            </Link>
-            <Link
               href="/rfq"
               className="hidden rounded-full bg-white px-5 py-2.5 text-sm font-semibold whitespace-nowrap text-navy-950 transition-colors duration-200 hover:bg-bronze-600 hover:text-white sm:block"
             >
@@ -168,14 +196,6 @@ function SiteHeaderContent({ pathname }: { pathname: string }) {
             </button>
           </div>
           <nav className="flex-1 overflow-y-auto px-4 py-6 sm:px-6" aria-label="Mobile">
-            <Link
-              href="/contact"
-              className={`block border-b border-white/8 py-4 font-display text-xl font-extrabold tracking-tight ${
-                isActive("/contact") ? "text-bronze-400" : "text-white"
-              }`}
-            >
-              Contact
-            </Link>
             {NAV_LINKS.map((link, i) => (
               <div key={link.label} className="border-b border-white/8">
                 <div className="flex items-center justify-between">
@@ -195,6 +215,7 @@ function SiteHeaderContent({ pathname }: { pathname: string }) {
                       }
                       className="flex h-10 w-10 items-center justify-center text-steel-300"
                       aria-label={`Toggle ${link.label} submenu`}
+                      aria-expanded={mobileExpanded === i}
                     >
                       <ChevronDown
                         className={`h-5 w-5 transition-transform ${

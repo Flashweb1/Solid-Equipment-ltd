@@ -8,13 +8,13 @@ export default function WhatsappFloat() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with Solid Equipment Ltd on WhatsApp"
-      className="group fixed right-5 bottom-5 z-50 flex items-center gap-0 rounded-full shadow-2xl shadow-navy-950/40"
+      className="fixed right-5 bottom-5 z-50 flex items-center gap-3 rounded-full bg-emerald-500 py-2 pr-5 pl-2 text-white shadow-lg shadow-emerald-600/25 transition-colors duration-200 hover:bg-emerald-600"
     >
-      <span className="glass max-w-0 overflow-hidden rounded-full py-3 font-mono text-xs font-semibold whitespace-nowrap text-white opacity-0 transition-all duration-300 group-hover:mr-3 group-hover:max-w-[240px] group-hover:px-4 group-hover:opacity-100 bg-emerald-600/90! border-emerald-400/30!">
-        Chat with our procurement desk
-      </span>
-      <span className="pulse-ring relative flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500 text-white transition-transform duration-300 group-hover:scale-110">
+      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/15">
         <MessageCircle className="h-6 w-6" fill="currentColor" strokeWidth={0} />
+      </span>
+      <span className="text-sm font-semibold whitespace-nowrap">
+        Any question?
       </span>
     </a>
   );

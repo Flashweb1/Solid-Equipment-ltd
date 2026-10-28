@@ -1,18 +1,19 @@
 const BRAND_RED = "#E2231F";
 
 /**
- * Solid Equipment Ltd — brand mark (red diamond + calligraphic S).
- * Compact version for the sticky header and small placements.
+ * Compact brand mark: white disc, red diamond + calligraphic S.
+ * Legible at header/favicon sizes; the full badge below is for large placements.
  */
-export function SelMark({ className = "h-10 w-10" }: { className?: string }) {
+export function SelMark({ className = "h-12 w-12" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 100 100" className={className} aria-hidden="true">
-      <path d="M50 3 L97 48 L50 97 L3 48 Z" fill={BRAND_RED} />
+    <svg viewBox="0 0 200 200" className={className} aria-hidden="true">
+      <circle cx="100" cy="100" r="96" fill="#FFFFFF" stroke="#AEB6BE" strokeWidth="3" />
+      <path d="M100 30 L147 76 L100 122 L53 76 Z" fill={BRAND_RED} />
       <path
-        d="M 66 30 C 54 19, 32 25, 30 39 C 28 51, 41 57, 52 57 C 63 57, 69 46, 62 40 C 55 34, 43 38, 38 45 C 30 56, 35 75, 51 78 C 65 81, 75 71, 71 59"
+        d="M 120 58 C 111 49, 94 54, 92 65 C 90 75, 100 80, 109 80 C 118 80, 123 71, 117 66 C 112 61, 103 64, 99 70 C 93 79, 97 94, 110 97 C 121 99, 129 91, 126 81"
         fill="none"
         stroke="#FFFFFF"
-        strokeWidth="6.5"
+        strokeWidth="4.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />

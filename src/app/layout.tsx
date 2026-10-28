@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1E293B",
+  themeColor: "#070d1a",
   width: "device-width",
   initialScale: 1,
 };
@@ -73,7 +73,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     },
     hasMap: SITE.mapUrl,
     areaServed: "West Africa",
-    openingHours: "Mo-Su 00:00-24:00",
+    logo: `${SITE.url}/icon.svg`,
+    image: `${SITE.url}/images/hero-mining.jpg`,
     sameAs: ["https://wa.me/2348033591883"],
     contactPoint: {
       "@type": "ContactPoint",
@@ -88,8 +89,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className="bg-steel-50 font-sans text-navy-900 antialiased">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-navy-950 focus:shadow-lg"
+        >
+          Skip to content
+        </a>
         <SiteHeader />
-        <main>{children}</main>
+        <main id="main">{children}</main>
         <SiteFooter />
         <WhatsappFloat />
         <script

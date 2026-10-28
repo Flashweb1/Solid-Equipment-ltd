@@ -37,6 +37,36 @@ const FILE_EXTENSIONS = new Set([
 ]);
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
 const MAX_REQUEST_SIZE = MAX_FILE_SIZE + 64 * 1024;
+const MAX_PAYLOAD_LENGTH = 16 * 1024; // JSON text only; files come as separate parts
+
+// Best-effort per-IP throttle for this single server instance. Bounds spam that
+// would otherwise burn email quota, storage and DB rows. Each entry: submit times.
+const WINDOW_MS = 60 * 60 * 1000; // 1 hour
+const MAX_PER_WINDOW = 5;
+const attempts = new Map<string, number[]>();
+
+function clientIp(request: NextRequest): string {
+  const fwd = request.headers.get("x-forwarded-for");
+  return (fwd?.split(",")[0].trim() || "unknown").slice(0, 100);
+}
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const recent = (attempts.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
+  if (recent.length >= MAX_PER_WINDOW) {
+    attempts.set(ip, recent);
+    return true;
+  }
+  recent.push(now);
+  attempts.set(ip, recent);
+  // Opportunistic cleanup so the map cannot grow unbounded.
+  if (attempts.size > 5000) {
+    for (const [key, times] of attempts) {
+      if (times.every((t) => now - t >= WINDOW_MS)) attempts.delete(key);
+    }
+  }
+  return false;
+}
 
 function str(value: unknown, max = 2000): string | null {
   if (typeof value !== "string") return null;
@@ -45,6 +75,13 @@ function str(value: unknown, max = 2000): string | null {
 }
 
 export async function POST(request: NextRequest) {
+  if (isRateLimited(clientIp(request))) {
+    return NextResponse.json(
+      { ok: false, error: "Too many requests. Please try again later or call our hotline." },
+      { status: 429 }
+    );
+  }
+
   const contentLength = Number(request.headers.get("content-length"));
   if (contentLength > MAX_REQUEST_SIZE) {
     return NextResponse.json(
@@ -72,8 +109,15 @@ export async function POST(request: NextRequest) {
     const formData = await request.formData();
     const payload = formData.get("payload");
     const fileValue = formData.get("file");
+    // Honeypot: real users never see or fill this; bots that do are dropped
+    // silently with a fake success so they do not adapt.
+    const honeypot = formData.get("website");
+    if (typeof honeypot === "string" && honeypot.trim() !== "") {
+      return NextResponse.json({ ok: true, reference: "", notificationSent: false });
+    }
     if (
       typeof payload !== "string" ||
+      payload.length > MAX_PAYLOAD_LENGTH ||
       (fileValue !== null && typeof fileValue === "string")
     ) {
       return NextResponse.json(

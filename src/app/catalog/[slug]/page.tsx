@@ -1,9 +1,20 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ProductDetailView from "@/components/catalog/product-detail-view";
-import { getProductBySlug, getRelatedProducts } from "@/lib/queries";
+import {
+  getAllProductSlugs,
+  getProductBySlug,
+  getRelatedProducts,
+} from "@/lib/queries";
 
-export const dynamic = "force-dynamic";
+// Catalog is seeded and changes rarely, so render statically and refresh in the
+// background (ISR) instead of hitting Postgres on every request.
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  const slugs = await getAllProductSlugs();
+  return slugs.map((slug) => ({ slug }));
+}
 
 export async function generateMetadata({
   params,

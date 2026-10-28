@@ -98,6 +98,9 @@ export default function RfqForm({
   const [notificationSent, setNotificationSent] = useState(true);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  // Honeypot: kept off-screen and out of the tab order so real users never
+  // reach it; the server rejects any submission that fills it.
+  const [hp, setHp] = useState("");
   const [data, setData] = useState<FormData>({
     serviceType: prefillService ?? "",
     equipmentCategory: prefillCategory ?? "",
@@ -140,6 +143,7 @@ export default function RfqForm({
     try {
       const formData = new FormData();
       formData.set("payload", JSON.stringify(data));
+      formData.set("website", hp);
       if (selectedFile) formData.set("file", selectedFile);
 
       const res = await fetch("/api/rfq", {
@@ -281,6 +285,20 @@ export default function RfqForm({
       </div>
 
       <form onSubmit={submit} noValidate>
+        {/* Honeypot field — visually hidden, never focused by real users. */}
+        <div aria-hidden="true" className="absolute h-0 w-0 overflow-hidden">
+          <label>
+            Leave this field blank
+            <input
+              type="text"
+              name="website"
+              value={hp}
+              onChange={(e) => setHp(e.target.value)}
+              tabIndex={-1}
+              autoComplete="off"
+            />
+          </label>
+        </div>
         {/* STEP 1 — Service */}
         {step === 1 ? (
           <div>
